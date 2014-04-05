@@ -1,0 +1,15 @@
+:development: &default_config
+  :storage:
+    :redis:
+      :host: 'localhost'
+      :port: 6379
+    :namespace: 'kata'
+
+:test:
+  <<: *default_config
+
+:stage:
+  <<: *default_config
+
+:production:
+  <<: *default_config
