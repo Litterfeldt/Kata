@@ -13,3 +13,9 @@
 
 :production:
   <<: *default_config
+  :storage:
+    :redis:
+      :password: 'wKdNOMiu8UY6xMly'
+      :host: 'pub-redis-18975.eu-west-1-1.2.ec2.garantiadata.com'
+      :port: 18975
+    :namespace: 'kata'
