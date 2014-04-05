@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="litterfeldtKata">
+  <head >
+    <meta charset="utf-8">
+    <title>Litterfeldt Kata</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/webflow.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+  </head>
+  <body>
+    <div class="w-nav top-nav" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1">
+      <div class="w-container">
+        <a class="w-nav-brand w-clearfix brand-logo" href="http://litterfeldt.com" target="_blank">
+          <div class="logo-text"><strong>LITTERFELDT</strong>
+          </div>
+          <div class="logo-pre-text">Kata</div>
+        </a>
+        <nav class="w-nav-menu" role="navigation"><a class="w-nav-link nav-link" href="http://github.com/litterfeldt" target="_blank">Github</a><a class="w-nav-link nav-link" href="http://twitter.com/litterfeldt" target="_blank">Twitter</a><a class="w-nav-link nav-link" href="http://litterfeldt.com"
+          target="_blank">More</a>
+        </nav>
+        <div class="w-nav-button">
+          <div class="w-icon-nav-menu"></div>
+        </div>
+      </div>
+    </div>
+    <div class="w-container container" ng-controller="SearchController">
+      <div class="flash-section">
+        <div class="error-flash" ng-show="searchFail">
+          <div class="error-msg">Couldn’t find any anagrams and it only took {{httpTiming}}s to figure that out! Please try another word or upload a dictionary.</div>
+        </div>
+        <div class="success-flash" ng-show="searchSuccess">
+          <div class="success-msg">Woho! Found some anagrams in only {{httpTiming}}s! Check me out on <a href="http://github.com/litterfeldt/kata" class="sucess-msg link" target="_blank">Github</a> to see how it happened!</div>
+        </div>
+        <div class="error-flash" ng-show="dictionaryFail">
+          <div class="error-msg">Couldn’t upload your dictionary and it only took us {{httpTiming}}s to figure that out! Please try uploading another file.</div>
+        </div>
+        <div class="success-flash" ng-show="dictionarySuccess">
+          <div class="success-msg">Woho! Uploaded that dictionary and it only took {{httpTiming}}s! Try searching for some anagrams!</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="w-clearfix search-form">
+          <form ng-submit="searchForAnagrams()">
+            <input class="w-input search-input" name="SearchText" type="text" placeholder="Serch for anagrams" required="required" autofocus="autofocus" ng-model="searchText"/>
+            <input id="search-button" class="w-button search-button" type="submit" value="Search"/>
+          </form>
+          <form name="myForm" ng-submit="submitDictionary">
+            <a id="dictionarybtn" class="button" ng-click="getFile()">Upload dictionary</a>
+            <!-- no binding control for file input type :( back to regular html and custom angular directive -->
+            <div style='display:none'>
+              <input id="upfile" type="file" accept="text/plain" onchange="angular.element(this).scope().uploadFile()" file-model="dicFile"/>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="section">
+        <div class="w-clearfix anagrams-show" ng-show="searchResponse">
+          <ul class="anagram-list" ng-repeat="(word, anagrams) in searchResponse">
+            <li class="anagram root">{{word}}</li>
+            <li class="anagram" ng-repeat="anagram in anagrams">{{anagram}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script src="javascript/litterfeldtKataApp.js"></script>
+  </body>
+</html>
