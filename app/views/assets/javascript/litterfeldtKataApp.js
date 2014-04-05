@@ -55,7 +55,7 @@ app.service('fileUpload', ['$http', function ($http) {
   }
 }]);
 
-app.controller('SearchController', function($scope, anagramFactory, fileUpload) {
+app.controller('SearchController', ['$scope', 'anagramFactory', 'fileUpload', function($scope, anagramFactory, fileUpload) {
   $scope.searchForAnagrams = function() {
       if($scope.searchText) {
         this.resetSwitches();
@@ -95,5 +95,5 @@ app.controller('SearchController', function($scope, anagramFactory, fileUpload) 
       fileUpload.uploadFileToUrl(file, uploadUrl, $scope);
     }, 250);
   };
-});
+}]);
 
