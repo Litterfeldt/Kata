@@ -43,7 +43,7 @@ module Kata
         word.chars.sort.join
       end
 
-      def normalize(text)
+      def normalize text
         text.downcase.scan(/[a-z]/).join
       end
     end

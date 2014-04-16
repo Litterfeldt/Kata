@@ -9,6 +9,7 @@ module Kata
     #is to be instantiated with an options hash
     class Client
       extend Forwardable
+
       def self.connect(options)
         redis = Redis.new(options[:redis])
         new Redis::Namespace.new(options[:namespace], redis: redis)
