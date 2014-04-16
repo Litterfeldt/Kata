@@ -5,12 +5,10 @@ module Kata
   #instantiates the storage client
   module Storage
     class << self
+      attr_reader :client
+
       def setup(options)
         @client = Client.connect(options)
-      end
-
-      def client
-        @client
       end
     end
   end
